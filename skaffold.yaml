@@ -1,0 +1,19 @@
+apiVersion: skaffold/v3alpha1
+kind: Config
+manifests:
+  rawYaml:
+    - ./infra/k8s/*
+build:
+  # local:
+  #   push: false
+  googleCloudBuild:
+    projectId: earnest-smithy-383511
+  artifacts:
+    - image: us.gcr.io/earnest-smithy-383511/ticketing/auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: "src/**/*.ts"
