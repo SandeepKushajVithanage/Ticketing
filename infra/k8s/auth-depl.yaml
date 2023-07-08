@@ -16,6 +16,12 @@ spec:
         - name: auth
           image: sandeepvithanage/ticketing-auth
           # image: us.gcr.io/earnest-smithy-383511/ticketing-auth
+          env:
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
 ---
 apiVersion: v1
 kind: Service
